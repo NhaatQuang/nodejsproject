@@ -1,0 +1,115 @@
+<% if(dataDetail.length==0){ %>
+    <p style="text-align: center;">Không có dữ liệu</p>
+    <% }else { %>
+        <table id="myTable_top" style="margin-top: 12px;">
+            <tr class="header_top">
+                <th>ID</th>
+                <th>Tên tài khoản</th>
+                <th>Mật khẩu</th>
+                <th>Trạng thái</th>
+                <th>Ngày đăng ký</th>
+            </tr>
+            <tr>
+                <td>
+                    <%= dataDetail[0].IDTK %>
+                </td>
+                <td>
+                    <%= dataDetail[0].TenTK %>
+                </td>
+                <td>
+                    <%= dataDetail[0].MatKhau %>
+                </td>
+                <td>
+                    <%= dataDetail[0].TTTK %>
+                </td>
+                <td>
+                    <%= dataDetail[0].NgayDK %>
+                </td>
+            </tr>
+        </table>
+
+        <table id="myTable_top" style="margin-top: 12px;">
+            <tr class="header_top">
+                <th>ID Hóa đơn</th>
+                <th>Tên khách hàng</th>
+                <th>Địa chỉ</th>
+                <th>SĐT</th>
+                <th>Tổng tiền</th>
+                <th>Ngày mua</th>
+                <th>Ghi chú</th>
+                <th>Trạng thái</th>
+            </tr>
+            <tr>
+                <td>
+                    <%= dataDetail[0].ID %>
+                </td>
+                <td>
+                    <%= dataDetail[0].TenKH %>
+                </td>
+                <td>
+                    <%= dataDetail[0].DiaChi %>
+                </td>
+                <td>
+                    <%= dataDetail[0].SDT %>
+                </td>
+                <td>
+                    <%= dataDetail[0].TongTien %>
+                </td>
+                <td>
+                    <%= dataDetail[0].NgayMua %>
+                </td>
+                <td>
+                    <%= dataDetail[0].GhiChu %>
+                </td>
+                <td>
+                    <%= dataDetail[0].TenTT %>
+                </td>
+            </tr>
+        </table>
+
+        <div style="text-align: center">
+            <input type="text" id="myInput" onkeyup="search_table_detail_receipt()" placeholder="Search for names.."
+                title="Type in a name">
+
+        </div>
+
+        <table id="myTable">
+            <tr class="header">
+                <th>STT</th>
+                <th>ID Sản phẩm</th>
+                <th>Tên sản phẩm</th>
+                <th>Xuất xứ</th>
+                <th>Đơn giá</th>
+                <th>Số lượng</th>
+                <th>Thành tiền</th>
+            </tr>
+            <% dataDetail.forEach((data)=> { %>
+                <tr>
+                    <td>
+                        <%= STT +=1 %>
+                    </td>
+                    <td>
+                        <%= data.IDSanPham %>
+                    </td>
+                    <td>
+                        <%= data.TenSanPham %>
+                    </td>
+                    <td>
+                        <%= data.XuatXu %>
+                    </td>
+                    <td>
+                        <%= data.GiaBan %>
+                    </td>
+                    <td>
+                        <%= data.SoLuong %>
+                    </td>
+                    <td>
+                        <%= data.ThanhTien %>
+                    </td>
+                </tr>
+                <% }) %>
+        </table>
+        <% } %>
+            <div style="text-align: center;margin: 10px;">
+                <button><a href="/admin/user/san-pham-da-mua/<%= dataDetail[0].IDTK %>">Trở về</a></button>
+            </div>

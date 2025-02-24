@@ -1,0 +1,78 @@
+.container {
+    background: white;
+}
+
+.card-text {
+    text-align: left;
+    color: black;
+}
+
+/* .card-body:hover{
+    color: tomato;
+} */
+
+.card-bodya {
+    text-align: left;
+    padding: 10px 20px;
+    min-height: 200px;
+}
+
+.card {
+    border: 1px solid rgba(0,0,0,0.5);
+}
+
+h5 {
+    text-align: center;
+}
+
+.card-title {
+    margin-top: 10px;
+    min-height: 80px;
+}
+
+.card-title h5 {
+    color: #e6c400;
+    font-weight: 700;
+}
+
+.card-made, .card-price {
+    font-weight: 600;
+}
+
+.card-price {
+    color: #cb0101;
+}
+
+
+.list-meu a {
+    color: white;
+}
+
+a:hover{
+    color: red;
+    ;
+}
+
+
+.Phan_Trang {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+}
+
+
+.Trang > li:hover {
+    color: white;
+    background-color: #333;
+}
+
+.Trang_1 {
+    color: white;
+    background-color: #333;
+}
+
+.col {
+    text-align: -webkit-center;
+}
+
