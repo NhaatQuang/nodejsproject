@@ -1,63 +1,142 @@
 <div class="container-fuild">
     <ul class="nav justify-content-center">
         <li class="nav-item">
-            <a href="/admin/login"><img src="https://www.dangquangwatch.vn/view/css/icon/Logo.png" alt=""></a>
+            <a href="/admin/login"
+                ><img
+                    src="https://www.dangquangwatch.vn/view/css/icon/Logo.png"
+                    alt=""
+            /></a>
         </li>
         <li>
-            <form class="d-flex" style="margin-top: 11px;" method="post" action="/customer/san-pham/search">
-                <input class="form-control me-2" type="search" placeholder="Tìm kiếm ..." aria-label="Search" name="search">
-                <button class="btn btn-search" type="submit" style="color: white">Tìm Kiếm</button>
+            <form
+                class="d-flex"
+                style="margin-top: 11px"
+                method="post"
+                action="/customer/san-pham/search"
+            >
+                <input
+                    class="form-control me-2"
+                    type="search"
+                    placeholder="Tìm kiếm ..."
+                    aria-label="Search"
+                    name="search"
+                />
+                <button
+                    class="btn btn-search"
+                    type="submit"
+                    style="color: white"
+                >
+                    Tìm Kiếm
+                </button>
             </form>
         </li>
         <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="/customer/home">Trang chủ</a>
+            <a class="nav-link active" aria-current="page" href="/customer/home"
+                >Trang chủ</a
+            >
         </li>
         <li class="nav-item dropdown" id="dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+            >
                 Sản phẩm
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <% dataHeaderSp.forEach((data) => { 
-                        %>
-                        <li><a class="dropdown-item" href="/customer/san-pham/loai-san-pham/<%= data.ID %> "><%= data.Ten %></a></li>
-                    <% 
-                }) %>
-                
+                <% dataHeaderSp.forEach((data) => { %>
+                <li>
+                    <a
+                        class="dropdown-item"
+                        href="/customer/san-pham/loai-san-pham/<%= data.ID %> "
+                        ><%= data.Ten %></a
+                    >
+                </li>
+                <% }) %>
             </ul>
         </li>
         <li class="nav-item dropdown" id="dropdown">
-            <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
+            <a
+                class="nav-link dropdown-toggle"
+                href="#"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+            >
                 Xuất xứ
             </a>
             <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <% dataHeaderXx.forEach((data) => { 
-                        %>
-                        <li><a class="dropdown-item" href="/customer/san-pham/xuat-xu/<%= data.ID %> "><%= data.XuatXu %></a></li>
-                    <% 
-                }) %>
-                
+                <% dataHeaderXx.forEach((data) => { %>
+                <li>
+                    <a
+                        class="dropdown-item"
+                        href="/customer/san-pham/xuat-xu/<%= data.ID %> "
+                        ><%= data.XuatXu %></a
+                    >
+                </li>
+                <% }) %>
             </ul>
         </li>
         <% if(!sessionID) { %>
-            <li class="nav-item">
-                <button type="button" class="btn btn-success"><a href="/customer/login">Đăng nhập</a></button>
-            </li>
-            <li class="nav-item">
-                <button type="button" class="btn btn-danger"><a href="/customer/signup">Đăng ký</a></button>
-            </li>
+        <li class="nav-item">
+            <button type="button" class="btn btn-success">
+                <a href="/customer/login">Đăng nhập</a>
+            </button>
+        </li>
+        <li class="nav-item">
+            <button type="button" class="btn btn-danger">
+                <a href="/customer/signup">Đăng ký</a>
+            </button>
+        </li>
         <% } else { %>
-            <li class="nav-item dropdown" id="dropdown">
-                <button class="dropdown-toggle" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false" style="background: #e6c400; color: white; border: 0px; border-radius: 6px; font-size: 24px; padding: 8px 14px; ">
-                 <%= sessionID.TenTK %>
-                </button>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                <li><a class="dropdown-item" href="/customer/changePass">Đổi mật khẩu</a></li>
-                <li><a class="dropdown-item" href="/customer/cart">Giỏ hàng</a></li>
-                <li><a class="dropdown-item" href="/customer/don-hang">Đơn hàng hiện có</a></li>
-                <li><a class="dropdown-item" href="/customer/don-hang/lich-su">Lịch sử đặt hàng</a></li>
-                <li><a class="dropdown-item" href="/customer/login">Đăng xuất</a></li>
-                </ul>
-            </li>
+        <li class="nav-item dropdown" id="dropdown">
+            <button
+                class="dropdown-toggle"
+                id="navbarDropdown"
+                role="button"
+                data-bs-toggle="dropdown"
+                aria-expanded="false"
+                style="
+                    background: #e6c400;
+                    color: white;
+                    border: 0px;
+                    border-radius: 6px;
+                    font-size: 24px;
+                    padding: 8px 14px;
+                "
+            >
+                <%= sessionID.TenTK %>
+            </button>
+            <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
+                <li>
+                    <a class="dropdown-item" href="/customer/changePass"
+                        >Đổi mật khẩu</a
+                    >
+                </li>
+                <li>
+                    <a class="dropdown-item" href="/customer/cart">Giỏ hàng</a>
+                </li>
+                <li>
+                    <a class="dropdown-item" href="/customer/don-hang"
+                        >Đơn hàng hiện có</a
+                    >
+                </li>
+                <li>
+                    <a class="dropdown-item" href="/customer/don-hang/lich-su"
+                        >Lịch sử đặt hàng</a
+                    >
+                </li>
+                <li>
+                    <a class="dropdown-item" href="/customer/login"
+                        >Đăng xuất</a
+                    >
+                </li>
+            </ul>
+        </li>
         <% } %>
     </ul>
     <script src="/customer/js/popper.min.js"></script>
