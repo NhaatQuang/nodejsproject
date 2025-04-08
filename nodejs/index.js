@@ -13,6 +13,9 @@ const port = 3000;
 
 app.use(cookieParser());
 
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
 app.use(session({
     secret: 'keyboard cat',
     resave: false,
@@ -22,8 +25,8 @@ app.use(session({
 app.use(fileUpload({
     tempFilePath: true
 }));
-app.use(express.urlencoded({ extended: true}));
-app.use(express.json());
+// app.use(express.urlencoded({ extended: true}));
+// app.use(express.json());
 
 app.use(express.static('./public'));
 
