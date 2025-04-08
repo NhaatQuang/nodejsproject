@@ -49,6 +49,7 @@
                     </tr>
                 <%  tong += data.ThanhTien ;
                 }) %>
+                <i class="total_value" style="display: none;"><%= tong %></i>
                 <tfoot>
                     <td colspan="5" style="text-align: right; border-right: 1px solid #333;">Tổng:</td>
                     <td><%= number_format(tong) %> <sup>VND</sup></td>
@@ -78,7 +79,8 @@
         
     <div style="margin-left: 2%;">
         <h3>Thông tin khách hàng</h3>
-        <form action="/customer/cart/order" method="post" style="margin: auto;max-width: 50%;">
+        <form action="/payment/create" method="post" style="margin: auto;max-width: 50%;">
+            <input type="hidden" name="total" id="total" value="">
             <div class="item_donhang">
                 <p>Họ và tên: <span>*</span></p><input class="input_cart" type="text" name="ho_ten" required>
             </div>
@@ -123,6 +125,11 @@
 <script src="/customer/js/popper.min.js"></script>
 <script src="/customer/js/bootstrap.min.js"></script>
 <script>
+    window.addEventListener("DOMContentLoaded", () => {
+        const totalText = document.querySelector("i.total_value")?.textContent || "";
+        document.querySelector("input#total").value = totalText.trim();
+    });
+
     var citis = document.getElementById("city");
     var districts = document.getElementById("district");
     var wards = document.getElementById("ward");
