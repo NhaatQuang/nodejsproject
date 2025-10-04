@@ -19,14 +19,14 @@
                 <tr>
                     <td><%= Stt += 1 %></td>
                     <td><%= data.TenSanPham %></td>
-                    <td><%= data.GiaBan %></td>
+                    <td><%= data.GiaBan.toLocaleString('vi-VN') %> VND</td>
                     <td><%= data.SoLuong %></td>
-                    <td><%= data.ThanhTien %></td>
+                    <td><%= data.ThanhTien.toLocaleString('vi-VN') %> VND</td>
                 </tr>
             <% }) %>
             <tr>
                 <td colspan="4" style="text-align: right;">Tổng:</td>
-                <td><%= tong %></td>
+                <td><%= tong.toLocaleString('vi-VN') %> VND</td>
             </tr>
         </table> 
     </div> 

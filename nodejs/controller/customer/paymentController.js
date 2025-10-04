@@ -15,7 +15,7 @@ exports.createPayment = async (req, res) => {
     const secretKey = momoConfig.secretKey;
     const redirectUrl = momoConfig.returnUrl;
     const ipnUrl = momoConfig.notifyUrl;
-
+//tạo các tham số request
     const requestType = "payWithMethod";
     const orderId = `${partnerCode}${Date.now()}`;
     const requestId = orderId;
@@ -33,7 +33,7 @@ exports.createPayment = async (req, res) => {
       .createHmac("sha256", secretKey)
       .update(rawSignature)
       .digest("hex");
-
+// tạo body gủi đến API momo
     const requestBody = {
       partnerCode,
       partnerName: "Test",
