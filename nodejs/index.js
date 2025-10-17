@@ -60,14 +60,36 @@ app.use((err, req, res, next) => {
     });
 });
 
-// PORT - QUAN TRỌNG cho Render
+// ============================================
+// START SERVER
+// ============================================
+
 const PORT = process.env.PORT || 3000;
+const HOST = process.env.HOST || '0.0.0.0';
 
-app.listen(PORT, '0.0.0.0', () => {
-    console.log('🚀 Server chạy trên port:', PORT);
-    console.log('📦 Database:', process.env.DB_NAME || 'dangquangwatch');
+const server = app.listen(PORT, HOST, () => {
+    const baseURL = process.env.NODE_ENV === 'production' 
+        ? `https://dangquangwatch.onrender.com` 
+        : `http://localhost:${PORT}`;
+    
+    console.log('');
+    console.log('╔════════════════════════════════════════════════╗');
+    console.log('║        🚀 ĐỒNG HỒ ĐĂNG QUANG SERVER           ║');
+    console.log('╚════════════════════════════════════════════════╝');
+    console.log('');
+    console.log('  📊 Server Information:');
+    console.log('  ├─ Port:', PORT);
+    console.log('  ├─ Environment:', process.env.NODE_ENV || 'development');
+    console.log('  └─ Host:', HOST);
+    console.log('');
+    console.log('  🌐 URLs:');
+    console.log('  ├─ Base:', baseURL);
+    console.log('  ├─ Home:', baseURL + '/customer/home');
+    console.log('  ├─ Admin:', baseURL + '/admin');
+    console.log('  └─ Health:', baseURL + '/health');
+    console.log('');
+    console.log('  💾 Database:', process.env.DB_NAME || 'dangquangwatch');
+    console.log('');
+    console.log('════════════════════════════════════════════════');
+    console.log('');
 });
-
-app.listen(port, () => {
-    console.log(`Run http://localhost:${port}/customer/home`)
-})
