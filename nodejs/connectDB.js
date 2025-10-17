@@ -8,7 +8,7 @@ const connection = mysql.createConnection({
   database: process.env.DB_NAME || 'dangquangwatch',
   multipleStatements: true,
   charset: 'utf8mb4',
-  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: true } : false,
+  ssl: process.env.NODE_ENV === 'production' ? { rejectUnauthorized: false } : false,
   connectTimeout: 60000
 });
 
