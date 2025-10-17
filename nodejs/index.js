@@ -42,6 +42,31 @@ app.get('*', function(req, res){
 });
 // app.set('layout', './customer/nolayout');
 
+// Health check endpoint (cho Render)
+app.get('/health', (req, res) => {
+    res.status(200).json({ 
+        status: 'OK', 
+        message: 'Server is running',
+        database: process.env.DB_NAME 
+    });
+});
+
+// Error handler
+app.use((err, req, res, next) => {
+    console.error('Error:', err.stack);
+    res.status(500).json({ 
+        error: 'Có lỗi xảy ra!',
+        message: process.env.NODE_ENV === 'development' ? err.message : 'Internal Server Error'
+    });
+});
+
+// PORT - QUAN TRỌNG cho Render
+const PORT = process.env.PORT || 3000;
+
+app.listen(PORT, '0.0.0.0', () => {
+    console.log('🚀 Server chạy trên port:', PORT);
+    console.log('📦 Database:', process.env.DB_NAME || 'dangquangwatch');
+});
 
 app.listen(port, () => {
     console.log(`Run http://localhost:${port}/customer/home`)
