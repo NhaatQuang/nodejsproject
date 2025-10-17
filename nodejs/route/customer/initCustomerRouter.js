@@ -3,6 +3,7 @@ const loginController = require('../../controller/customer/loginController');
 const homeController = require('../../controller/customer/homeController');
 const sanphamController = require('../../controller/customer/sanphamController');
 const paymentRoute = require("./paymentRoute");
+const chatRoute = require('./chatRoute');
 
 const route = express.Router()
 
@@ -42,7 +43,9 @@ const initCustomerRouter = (app) => {
     route.get('/don-hang/huy/:idDh', isLogin, sanphamController.huyDonHang);
     route.get('/don-hang/lich-su/', isLogin, sanphamController.lichSuDonHang);
     app.use("/payment", paymentRoute);
+    route.use('/chat', chatRoute);
     return app.use('/customer/', route);
+    
 
 }
 

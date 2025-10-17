@@ -281,7 +281,117 @@ function huyDonHang(callback, id){
     )
 }
 
+// Hàm lấy tất cả sản phẩm cho AI (CẬP NHẬT - ĐẢM BẢO CÓ ID_LoaiSanPham)
+function getAllProductsForAI(callback) {
+    connection.query(
+        'SELECT sanpham.ID, sanpham.ID_LoaiSanPham, sanpham.TenSanPham, sanpham.GiaBan, sanpham.SoLuong, sanpham.imgName, ' +
+        'loaisanpham.Ten as LoaiSanPham, xuatxu.XuatXu ' +
+        'FROM sanpham ' +
+        'INNER JOIN loaisanpham ON loaisanpham.ID = sanpham.ID_LoaiSanPham ' +
+        'INNER JOIN xuatxu ON xuatxu.ID = sanpham.XuatXu ' +
+        'WHERE show_xx != 0 AND show_sp != 0 AND show_lsp != 0 AND SoLuong > 0 ' +
+        'ORDER BY sanpham.update_at DESC',
+        function(err, results) {
+            if(err) throw err;
+            return callback(results);
+        }
+    );
+}
+
+// Hàm lấy sản phẩm theo loại cho AI (CẬP NHẬT - LỌC CHÍNH XÁC HƠN)
+function getProductsByTypeForAI(callback, loaiSanPham, genderType = null) {
+    let searchPattern = '%' + loaiSanPham + '%';
+    let query = 
+        'SELECT sanpham.ID, sanpham.ID_LoaiSanPham, sanpham.TenSanPham, sanpham.GiaBan, sanpham.SoLuong, sanpham.imgName, ' +
+        'loaisanpham.Ten as LoaiSanPham, xuatxu.XuatXu ' +
+        'FROM sanpham ' +
+        'INNER JOIN loaisanpham ON loaisanpham.ID = sanpham.ID_LoaiSanPham ' +
+        'INNER JOIN xuatxu ON xuatxu.ID = sanpham.XuatXu ' +
+        'WHERE show_xx != 0 AND show_sp != 0 AND show_lsp != 0 AND SoLuong > 0 ';
+    
+    let params = [];
+    
+    // Lọc theo loại sản phẩm
+    if (genderType === 'nam') {
+        query += 'AND loaisanpham.Ten = ? ';
+        params.push('Đồng hồ nam');
+    } else if (genderType === 'nữ') {
+        query += 'AND loaisanpham.Ten = ? ';
+        params.push('Đồng hồ nữ');
+    } else {
+        query += 'AND (loaisanpham.Ten LIKE ? OR sanpham.TenSanPham LIKE ?) ';
+        params.push(searchPattern, searchPattern);
+    }
+    
+    query += 'ORDER BY sanpham.update_at DESC LIMIT 10';
+    
+    connection.query(query, params, function(err, results) {
+        if(err) throw err;
+        return callback(results);
+    });
+}
+
+// Hàm lấy sản phẩm theo khoảng giá cho AI (CẬP NHẬT - THÊM FILTER GENDER)
+function getProductsByPriceRangeForAI(callback, minPrice, maxPrice, genderType = null) {
+    let query = 
+        'SELECT sanpham.ID, sanpham.ID_LoaiSanPham, sanpham.TenSanPham, sanpham.GiaBan, sanpham.SoLuong, sanpham.imgName, ' +
+        'loaisanpham.Ten as LoaiSanPham, xuatxu.XuatXu ' +
+        'FROM sanpham ' +
+        'INNER JOIN loaisanpham ON loaisanpham.ID = sanpham.ID_LoaiSanPham ' +
+        'INNER JOIN xuatxu ON xuatxu.ID = sanpham.XuatXu ' +
+        'WHERE show_xx != 0 AND show_sp != 0 AND show_lsp != 0 AND SoLuong > 0 ' +
+        'AND sanpham.GiaBan BETWEEN ? AND ? ';
+    
+    let params = [minPrice, maxPrice];
+    
+    if (genderType === 'nam') {
+        query += 'AND loaisanpham.Ten = ? ';
+        params.push('Đồng hồ nam');
+    } else if (genderType === 'nữ') {
+        query += 'AND loaisanpham.Ten = ? ';
+        params.push('Đồng hồ nữ');
+    }
+    
+    query += 'ORDER BY sanpham.GiaBan ASC LIMIT 10';
+    
+    connection.query(query, params, function(err, results) {
+        if(err) throw err;
+        return callback(results);
+    });
+}
+
+// Hàm lấy sản phẩm theo xuất xứ cho AI (CẬP NHẬT - THÊM FILTER GENDER)
+function getProductsByOriginForAI(callback, xuatXu, genderType = null) {
+    let query = 
+        'SELECT sanpham.ID, sanpham.ID_LoaiSanPham, sanpham.TenSanPham, sanpham.GiaBan, sanpham.SoLuong, sanpham.imgName, ' +
+        'loaisanpham.Ten as LoaiSanPham, xuatxu.XuatXu ' +
+        'FROM sanpham ' +
+        'INNER JOIN loaisanpham ON loaisanpham.ID = sanpham.ID_LoaiSanPham ' +
+        'INNER JOIN xuatxu ON xuatxu.ID = sanpham.XuatXu ' +
+        'WHERE show_xx != 0 AND show_sp != 0 AND show_lsp != 0 AND SoLuong > 0 ' +
+        'AND xuatxu.XuatXu = ? ';
+    
+    let params = [xuatXu];
+    
+    if (genderType === 'nam') {
+        query += 'AND loaisanpham.Ten = ? ';
+        params.push('Đồng hồ nam');
+    } else if (genderType === 'nữ') {
+        query += 'AND loaisanpham.Ten = ? ';
+        params.push('Đồng hồ nữ');
+    }
+    
+    query += 'ORDER BY sanpham.update_at DESC LIMIT 10';
+    
+    connection.query(query, params, function(err, results) {
+        if(err) throw err;
+        return callback(results);
+    });
+}
+
 module.exports = {
     getDetail, getLoaiSanPham, getXuatXu, searchSanPham, addToCart, getCart, updateCart,
-    deleteCart, orderCart, donHang, chiTietDonHang, lichSuDonHang, huyDonHang
+    deleteCart, orderCart, donHang, chiTietDonHang, lichSuDonHang, huyDonHang,
+    getAllProductsForAI, getProductsByTypeForAI, getProductsByPriceRangeForAI, 
+    getProductsByOriginForAI
 };

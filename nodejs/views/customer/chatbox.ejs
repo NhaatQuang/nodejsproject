@@ -1,0 +1,83 @@
+<div class="chatbox-container">
+    <!-- Nút toggle chatbox -->
+    <button class="chatbox-toggle" id="chatboxToggle" title="Chat với AI">
+        <i class="fas fa-robot"></i>
+    </button>
+    
+    <!-- Cửa sổ chat -->
+    <div class="chatbox-window" id="chatboxWindow">
+        <!-- Header -->
+        <div class="chatbox-header">
+            <div class="chatbox-header-left">
+                <div class="chatbox-header-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="chatbox-header-info">
+                    <h4>Trợ lý AI</h4>
+                    <p>Luôn sẵn sàng hỗ trợ bạn</p>
+                </div>
+            </div>
+            <button class="chatbox-close" onclick="toggleChatbox()" title="Đóng">
+                <i class="fas fa-times"></i>
+            </button>
+        </div>
+        
+        <!-- Tin nhắn -->
+        <div class="chatbox-messages" id="chatboxMessages">
+            <div class="message ai">
+                <div class="message-avatar">
+                    <i class="fas fa-robot"></i>
+                </div>
+                <div class="message-content">
+                    👋 Xin chào! Tôi là trợ lý AI thông minh.<br>
+                    Tôi có thể giúp bạn:<br>
+                    • Tìm sản phẩm theo loại<br>
+                    • Tìm sản phẩm theo giá<br>
+                    • Tìm sản phẩm theo xuất xứ<br>
+                    • Tư vấn mua hàng<br><br>
+                    Bạn cần hỗ trợ gì?
+                </div>
+            </div>
+            
+            <!-- THÊM QUICK REPLIES -->
+            <div class="quick-replies" id="quickReplies">
+                <button class="quick-reply-btn" onclick="quickReply('Tìm đồng hồ nam')">
+                    ⌚ Đồng hồ nam
+                </button>
+                <button class="quick-reply-btn" onclick="quickReply('Sản phẩm dưới 5 triệu')">
+                    💰 Dưới 5 triệu
+                </button>
+                <button class="quick-reply-btn" onclick="quickReply('Hàng Nhật')">
+                    🇯🇵 Hàng Nhật
+                </button>
+                <button class="quick-reply-btn" onclick="quickReply('Chính sách đổi trả')">
+                    🔄 Đổi trả
+                </button>
+            </div>
+        </div>
+        
+        <!-- Typing indicator -->
+        <div class="typing-indicator" id="typingIndicator">
+            <span class="typing-text">AI đang trả lời</span>
+            <div class="typing-dots">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+        
+        <!-- Input -->
+        <div class="chatbox-input">
+            <input 
+                type="text" 
+                id="chatInput" 
+                placeholder="VD: Tìm đồng hồ dưới 3 triệu" 
+                maxlength="500"
+                autocomplete="off"
+            >
+            <button id="sendButton" onclick="sendMessage()" title="Gửi">
+                <i class="fas fa-paper-plane"></i>
+            </button>
+        </div>
+    </div>
+</div>
